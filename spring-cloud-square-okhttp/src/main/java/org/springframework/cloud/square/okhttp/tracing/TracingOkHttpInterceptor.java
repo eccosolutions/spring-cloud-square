@@ -30,8 +30,8 @@ import okhttp3.Connection;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * An implementation fo {@link Interceptor} that provides tracing support. This
@@ -47,6 +47,7 @@ import org.springframework.lang.Nullable;
  * @see <a
  * href=https://github.com/openzipkin/brave/blob/master/instrumentation/okhttp3/src/main/java/brave/okhttp3/TracingInterceptor.java>TracingInterceptor.java</a>
  */
+@NullMarked
 public class TracingOkHttpInterceptor implements Interceptor {
 
 	final CurrentTraceContext currentTraceContext;
@@ -108,7 +109,7 @@ public class TracingOkHttpInterceptor implements Interceptor {
 
 		final Request delegate;
 
-		Request.Builder builder;
+		Request.@Nullable Builder builder;
 
 		RequestWrapper(Request delegate) {
 			this.delegate = delegate;
@@ -135,7 +136,7 @@ public class TracingOkHttpInterceptor implements Interceptor {
 		}
 
 		@Override
-		public String header(String name) {
+		public @Nullable String header(String name) {
 			return delegate.header(name);
 		}
 
@@ -170,7 +171,7 @@ public class TracingOkHttpInterceptor implements Interceptor {
 		}
 
 		@Override
-		public Object unwrap() {
+		public @Nullable Object unwrap() {
 			return response;
 		}
 
@@ -180,7 +181,7 @@ public class TracingOkHttpInterceptor implements Interceptor {
 		}
 
 		@Override
-		public Throwable error() {
+		public @Nullable Throwable error() {
 			return error;
 		}
 
