@@ -20,7 +20,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring-cloud-sleuth.version>3.1.2-SNAPSHOT</spring-cloud-sleuth.version>
+		<spring-cloud-sleuth.version>3.1.11</spring-cloud-sleuth.version>
 		<spring-cloud-commons.version>4.3.0</spring-cloud-commons.version>
 	</properties>
 
