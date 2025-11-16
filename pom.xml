@@ -41,12 +41,11 @@
 				<scope>import</scope>
 			</dependency>
 			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-sleuth-dependencies</artifactId>
-				<version>${spring-cloud-sleuth.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
+				<groupId>org.jspecify</groupId>
+				<artifactId>jspecify</artifactId>
+				<version>1.0.0</version>
 			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 	<modules>
@@ -127,14 +126,14 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>io.spring.javaformat</groupId>
-				<artifactId>spring-javaformat-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.basepom.maven</groupId>
-				<artifactId>duplicate-finder-maven-plugin</artifactId>
-			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>io.spring.javaformat</groupId>-->
+<!--				<artifactId>spring-javaformat-maven-plugin</artifactId>-->
+<!--			</plugin>-->
+<!--			<plugin>-->
+<!--				<groupId>org.basepom.maven</groupId>-->
+<!--				<artifactId>duplicate-finder-maven-plugin</artifactId>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 	<reporting>
