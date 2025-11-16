@@ -18,22 +18,19 @@ package org.springframework.cloud.square.okhttp.tracing;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.util.Collection;
-import java.util.Collections;
 
+import brave.Span;
+import brave.http.HttpClientHandler;
+import brave.http.HttpClientRequest;
+import brave.http.HttpClientResponse;
+import brave.http.HttpRequestParser;
+import brave.http.HttpResponseParser;
+import brave.propagation.CurrentTraceContext;
 import okhttp3.Connection;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import org.springframework.cloud.sleuth.CurrentTraceContext;
-import org.springframework.cloud.sleuth.Span;
-import org.springframework.cloud.sleuth.TraceContext;
-import org.springframework.cloud.sleuth.http.HttpClientHandler;
-import org.springframework.cloud.sleuth.http.HttpClientRequest;
-import org.springframework.cloud.sleuth.http.HttpClientResponse;
-import org.springframework.cloud.sleuth.http.HttpRequestParser;
-import org.springframework.cloud.sleuth.http.HttpResponseParser;
 import org.springframework.lang.Nullable;
 
 /**
@@ -78,7 +75,7 @@ public class TracingOkHttpInterceptor implements Interceptor {
 		RequestWrapper request = new RequestWrapper(chain.request());
 		Span span;
 
-		TraceContext parent = chain.request().tag(TraceContext.class);
+		Span parent = chain.request().tag(Span.class);
 		if (parent != null) {
 			span = httpClientHandler.handleSend(request, parent);
 		}
@@ -107,7 +104,7 @@ public class TracingOkHttpInterceptor implements Interceptor {
 		}
 	}
 
-	static final class RequestWrapper implements HttpClientRequest {
+	static final class RequestWrapper extends HttpClientRequest {
 
 		final Request delegate;
 
@@ -115,11 +112,6 @@ public class TracingOkHttpInterceptor implements Interceptor {
 
 		RequestWrapper(Request delegate) {
 			this.delegate = delegate;
-		}
-
-		@Override
-		public Collection<String> headerNames() {
-			return delegate.headers().toMultimap().keySet();
 		}
 
 		@Override
@@ -161,7 +153,7 @@ public class TracingOkHttpInterceptor implements Interceptor {
 
 	}
 
-	static final class ResponseWrapper implements HttpClientResponse {
+	static final class ResponseWrapper extends HttpClientResponse {
 
 		final RequestWrapper request;
 
@@ -180,11 +172,6 @@ public class TracingOkHttpInterceptor implements Interceptor {
 		@Override
 		public Object unwrap() {
 			return response;
-		}
-
-		@Override
-		public Collection<String> headerNames() {
-			return response != null ? response.headers().toMultimap().keySet() : Collections.emptyList();
 		}
 
 		@Override

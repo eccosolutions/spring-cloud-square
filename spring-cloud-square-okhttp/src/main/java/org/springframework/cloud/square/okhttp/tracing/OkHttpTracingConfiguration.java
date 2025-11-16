@@ -16,12 +16,13 @@
 
 package org.springframework.cloud.square.okhttp.tracing;
 
+import brave.http.HttpClientHandler;
+import brave.propagation.CurrentTraceContext;
+import brave.propagation.TraceContext;
+
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.cloud.sleuth.CurrentTraceContext;
-import org.springframework.cloud.sleuth.TraceContext;
-import org.springframework.cloud.sleuth.http.HttpClientHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
