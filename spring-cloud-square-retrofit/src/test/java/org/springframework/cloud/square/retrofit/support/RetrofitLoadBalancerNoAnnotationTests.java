@@ -41,7 +41,7 @@ import org.springframework.cloud.square.retrofit.test.Hello;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.util.SocketUtils;
+import org.springframework.test.util.TestSocketUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -66,7 +66,7 @@ class RetrofitLoadBalancerNoAnnotationTests {
 
 	@BeforeAll
 	static void beforeClass() {
-		port = SocketUtils.findAvailableTcpPort();
+		port = TestSocketUtils.findAvailableTcpPort();
 		System.setProperty("server.port", String.valueOf(port));
 	}
 

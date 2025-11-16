@@ -354,7 +354,7 @@ public abstract class AbstractRetrofitClientsRegistrar
 		 */
 		AllTypeFilter(List<TypeFilter> delegates) {
 
-			Assert.notNull(delegates);
+			Assert.notNull(delegates, "Delegates must not be null");
 			this.delegates = delegates;
 		}
 

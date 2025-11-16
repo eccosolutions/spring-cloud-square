@@ -134,7 +134,7 @@ public class WebClientCallAdapterFactory extends CallAdapter.Factory {
 	}
 
 	WebClient.RequestBodySpec requestBuilder(WebClient webClient, Request request) {
-		WebClient.RequestBodySpec spec = webClient.mutate().build().method(HttpMethod.resolve(request.method()))
+		WebClient.RequestBodySpec spec = webClient.mutate().build().method(HttpMethod.valueOf(request.method()))
 				.uri(request.url().uri()).headers(httpHeaders -> {
 					for (Map.Entry<String, List<String>> entry : request.headers().toMultimap().entrySet()) {
 						httpHeaders.put(entry.getKey(), entry.getValue());
